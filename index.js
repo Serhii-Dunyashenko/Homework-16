@@ -9,9 +9,9 @@ const objectFull = {
 function isEmpty (obj) {
     let keysCount = Object.keys(obj).length;
     if (keysCount > 1) {
-        console.log(`This pbject is full of properties`)
+        console.log(`This object is full of properties`)
     } else {
-        console.log(`This pbject is empty`)
+        console.log(`This object is empty`)
     }
 };
 isEmpty(objectFull);
@@ -35,31 +35,46 @@ Object.defineProperty(employee1,'nationality', {value: "Armenia", configurable: 
 
 const employee2 = {}
 
-Object.defineProperty(employee2,'firstName', {value: "Nikolay", configurable: false} );
-Object.defineProperty(employee2,'lastName', {value: "Baskov", configurable: false} );
-Object.defineProperty(employee2,'age', {value: 46, configurable: false} );
-Object.defineProperty(employee2,'experience', {value: 0, configurable: false} );
-Object.defineProperty(employee2,'nationality', {value: "Moskal", configurable: false} );
+Object.defineProperty(employee2,'firstName', {value: "Nikolay", configurable: true} );
+Object.defineProperty(employee2,'lastName', {value: "Baskov", configurable: true} );
+Object.defineProperty(employee2,'age', {value: 46, configurable: true} );
+Object.defineProperty(employee2,'experience', {value: 0, configurable: true} );
+Object.defineProperty(employee2,'nationality', {value: "Moskal", configurable: true} );
 
+// Lie to Me
+
+function lieToMe(obj) {;
+    Object.defineProperty(employee2,'experience', {value: "25"} );
+    delete obj.age;
+}
+
+// Check function
 function hireNewEmployee (obj) {
-    let reasons = [];
 
+    // Lie
+    lieToMe(obj);
+   
+    // Reasons
+    let reasons = [];
     if (obj.age < 25) {
-        reasons.push(` Your age is ${obj.age}, which is less than 25 years old`)
+        reasons.push(` Your age is ${obj.age}, which is less than 25 years old.`)
     };
     if (obj.experience < 2) {
-        reasons.push(` Your experience is ${obj.experience} years, which  is less than 2 years`)
+        reasons.push(` Your experience is ${obj.experience} years, which  is less than 2 years.`)
     };
     if (obj.nationality.toUpperCase() === "MOSKAL") {
-        reasons.push(` Follow the russian battleship`)
+        reasons.push(` Follow the russian battleship!`)
     };
 
-    if (obj.length === 0) {
+    // Decision
+    if (reasons.length === 0) {
         console.log(`You're Hired! Congrats!`);
     } else {
         console.log(`Not hired: sorry we cannot hire you. Here is why: ${reasons}`);
     }
 };
+
+
 
 hireNewEmployee (employee2);
 hireNewEmployee (employee1);
