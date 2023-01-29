@@ -16,3 +16,50 @@ function isEmpty (obj) {
 };
 isEmpty(objectFull);
 isEmpty(objectEmpty);
+
+
+// 2. Hire Employee
+
+// Good employee
+
+const employee1 = {}
+
+Object.defineProperty(employee1,'firstName', {value: "Serj", configurable: false} );
+Object.defineProperty(employee1,'lastName', {value: "Tankian", configurable: false} );
+Object.defineProperty(employee1,'age', {value: 55, configurable: false} );
+Object.defineProperty(employee1,'experience', {value: 5, configurable: false} );
+Object.defineProperty(employee1,'nationality', {value: "Armenia", configurable: false} );
+
+
+// Bad employee
+
+const employee2 = {}
+
+Object.defineProperty(employee2,'firstName', {value: "Nikolay", configurable: false} );
+Object.defineProperty(employee2,'lastName', {value: "Baskov", configurable: false} );
+Object.defineProperty(employee2,'age', {value: 46, configurable: false} );
+Object.defineProperty(employee2,'experience', {value: 0, configurable: false} );
+Object.defineProperty(employee2,'nationality', {value: "Moskal", configurable: false} );
+
+function hireNewEmployee (obj) {
+    let reasons = [];
+
+    if (obj.age < 25) {
+        reasons.push(` Your age is ${obj.age}, which is less than 25 years old`)
+    };
+    if (obj.experience < 2) {
+        reasons.push(` Your experience is ${obj.experience} years, which  is less than 2 years`)
+    };
+    if (obj.nationality.toUpperCase() === "MOSKAL") {
+        reasons.push(` Follow the russian battleship`)
+    };
+
+    if (obj.length === 0) {
+        console.log(`You're Hired! Congrats!`);
+    } else {
+        console.log(`Not hired: sorry we cannot hire you. Here is why: ${reasons}`);
+    }
+};
+
+hireNewEmployee (employee2);
+hireNewEmployee (employee1);
